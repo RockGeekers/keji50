@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.keji50.portal.dao.mapper.InfoPoMapper">
+
+	<resultMap id="AccountResultMap" type="com.keji50.portal.dao.po.AccountPo">
+		<id column="author_id" property="id" jdbcType="DECIMAL" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="nickname" property="nickname" jdbcType="VARCHAR" />
+		<result column="author_image" property="image" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap id="CategoryResultMap" type="com.keji50.portal.dao.po.InfoCategoryPo">
+		<id column="info_category_id" property="id" jdbcType="DECIMAL" />
+		<result column="info_category_name" property="name" jdbcType="VARCHAR" />
+		<result column="color_code" property="colorCode" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="InfoResultMap" type="com.keji50.portal.dao.po.InfoPo">
+		<id property="id" column="id" jdbcType="DECIMAL" />
+		<result property="title" column="title" jdbcType="VARCHAR" />
+		<result property="image" column="image" jdbcType="VARCHAR" />
+		<result property="shortDesc" column="short_desc" jdbcType="VARCHAR" />
+		<result property="content" column="content" jdbcType="VARCHAR" />
+		<result property="tags" column="tags" jdbcType="VARCHAR" />
+		<result property="suggest" column="suggest" jdbcType="VARCHAR"/>
+		<result property="createDate" column="create_date" jdbcType="TIMESTAMP" />
+		<result property="updateDate" column="update_date" jdbcType="TIMESTAMP" />
+		<result property="state" column="state" jdbcType="VARCHAR" />
+		<association property="author" column="author_id" resultMap="AccountResultMap" />
+		<association property="infoCategory" column="info_category_id" resultMap="CategoryResultMap" />
+	</resultMap>
+	<sql id="Info_Column_List">
+		a.id, a.info_category_id, a.author_id, a.title, a.image, a.short_desc, a.tags, a.create_date
+	</sql>
+	<sql id="Account_Column_List">
+		b.username, b.email, b.nickname, b.image as account_image
+	</sql>
+	<sql id="Category_Column_List">
+		c.name as info_category_name, c.color_code
+	</sql>
+
+	<select id="selectByCondition" resultMap="InfoResultMap">
+		select <include refid="Info_Column_List" />, <include refid="Account_Column_List" />, <include refid="Category_Column_List" /> from info a
+		left join account b on a.author_id = b.id
+		left join info_category c on
+		a.info_category_id = c.id
+		where a.state = 's'
+		<if test="info_category_id != null and info_category_id > 0">
+			and a.info_category_id = #{info_category_id, jdbcType=DECIMAL}
+		</if>
+		<if test="author_id != null and author_id > 0">
+			and a.author_id = #{author_id, jdbcType=DECIMAL}
+		</if>
+		order by id desc
+	</select>
+	
+	<select id="selectByConditionCommand" resultMap="InfoResultMap">
+		select <include refid="Info_Column_List" />, <include refid="Account_Column_List" />, <include refid="Category_Column_List" /> from info a
+		left join account b on a.author_id = b.id
+		left join info_category c on
+		a.info_category_id = c.id
+		where a.state = 's'
+		<if test="info_category_id != null and info_category_id > 0">
+			and a.info_category_id = #{info_category_id, jdbcType=DECIMAL}
+		</if>
+		<if test="author_id != null and author_id > 0">
+			and a.author_id = #{author_id, jdbcType=DECIMAL}
+		</if>
+		<if test="offset > 0">
+			<if test="d == 'previous'">
+				and a.id &gt; #{offset, jdbcType=DECIMAL}	
+			</if>
+			<if test="d == 'next'">
+				and a.id &lt; #{offset, jdbcType=DECIMAL}
+			</if>
+		</if>
+		order by id desc limit 10
+	</select>
+	
+	<select id="selectById" resultMap="InfoResultMap">
+		select <include refid="Info_Column_List" /> , a.content, <include refid="Account_Column_List" /> from info a
+		left join account b on a.author_id = b.id
+		where a.state = 's' and a.id = #{id, jdbcType=DECIMAL}
+	</select>
+	
+	<select id="selectNextById" resultMap="InfoResultMap">
+		select <include refid="Info_Column_List" />, a.content, <include refid="Account_Column_List" /> from info a
+		left join account b on a.author_id = b.id
+		where a.state = 's' and a.id &lt; #{id, jdbcType=DECIMAL}
+		order by id desc limit 1
+	</select>
+	
+	<select id="selectByAuthor" resultMap="InfoResultMap">
+		select id, title, image from info
+		where state = 's' and author_id = #{authorId, jdbcType=DECIMAL}
+		order by id desc
+	</select>
+	
+	<select id="selectSuggests" resultMap="InfoResultMap">
+		select a.id, a.title, a.image, a.info_category_id, <include refid="Category_Column_List" /> from info a
+		left join info_category c on a.info_category_id = c.id
+		where a.state = 's' and a.suggest = '1' order by update_date desc limit 6
+	</select>
+	
+	<select id="selectHots" resultMap="InfoResultMap">
+		select i.id, i.title, i.image, count(c.id) as comment_count from info i
+		left join info_comment c on i.id = c.info_id
+		where i.state = 's'
+		group by i.id order by comment_count desc, id desc limit 6
+	</select>
+
+</mapper>

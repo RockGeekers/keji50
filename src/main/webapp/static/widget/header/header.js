@@ -1,0 +1,1 @@
+define("widget/header/header",function(){});

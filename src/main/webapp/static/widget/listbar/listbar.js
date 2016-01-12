@@ -1,0 +1,1 @@
+define("widget/listbar/listbar",["require","exports","module","components/jquery/jquery"],function(n,e,t){{var i=n("components/jquery/jquery");t.exports=function(){var n={init:function(){this.addEvent()},addEvent:function(){{var n=i("#J_navBar");n[0]}}};n.init()}}});
