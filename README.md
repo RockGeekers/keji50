@@ -1,1 +1,4 @@
-# keji50
+# keji50 portal
+
+mvn clean install
+
