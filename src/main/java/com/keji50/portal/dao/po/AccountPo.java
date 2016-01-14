@@ -23,15 +23,25 @@ public class AccountPo {
     private int id;
 
     /**
-     * 用户登录名
-     */
-    private String username;
-
-    /**
      * 用户邮箱
      */
     private String email;
+    
+    /**
+     * 手机号
+     */
+    private String phone;
+    
+    /**
+     * 密码
+     */
+    private String password;
 
+    /**
+     * 真实姓名
+     */
+    private String realname;
+    
     /**
      * 用户昵称
      */
@@ -43,6 +53,21 @@ public class AccountPo {
     private String image;
 
     /**
+     * QQ
+     */
+    private String qq;
+    
+    /**
+     * 微博
+     */
+    private String weibo;
+    
+    /**
+     * 微信
+     */
+    private String wechat;
+    
+    /**
      * 用户状态
      */
     private int status;
@@ -52,14 +77,14 @@ public class AccountPo {
     }
 
     public String getNickname() {
+        if (StringUtils.isNotEmpty(realname)) {
+            return realname;
+        }
+        
         if (StringUtils.isNotEmpty(nickname)) {
             return nickname;
         }
 
-        if (StringUtils.isNotEmpty(username)) {
-            return username;
-        }
-
-        return email;
+        return String.valueOf(id);
     }
 }
