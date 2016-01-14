@@ -1,6 +1,48 @@
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
+-- 账户信息表
+-- ----------------------------
+DROP TABLE IF EXISTS `account`;
+CREATE TABLE `account` (
+	`id` int(11) unsigned auto_increment NOT NULL COMMENT '主键ID',
+	`phone` varchar(11) COMMENT '手机号',
+	`email` varchar(100) COMMENT '邮箱',
+	`password` varchar(32) NOT NULL COMMENT 'MD5 32位密码',
+	`nickname` varchar(50) COMMENT '昵称',
+	`realname` varchar(20) COMMENT '真实姓名',
+	`image` varchar(100) COMMENT '头像',
+	`qq`    varchar(20)  COMMENT 'QQ号码',
+	`weibo` varchar(50)  COMMENT '微博账号',
+	`wechat` varchar(50) COMMENT '微信账号',
+	`status` varchar(1)  NOT NULL DEFAULT 's' COMMENT '用户状态   s:激活， d:删除',
+	`create_by` varchar(64) DEFAULT 'system' COMMENT '创建人',
+  	`create_time` datetime    COMMENT '创建时间',
+  	`update_by` varchar(64) DEFAULT 'system' COMMENT '修改人',
+  	`update_time` datetime    COMMENT '修改时间',
+	PRIMARY KEY (`id`),
+    KEY `account_id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='账户信息表';
+
+-- ----------------------------
+-- 手机邮箱认证信息表
+-- ----------------------------
+DROP TABLE IF EXISTS `account_validate`;
+CREATE TABLE `account_validate` (
+	`id` int(11) unsigned auto_increment NOT NULL COMMENT '主键ID',
+  	`type` varchar(2) DEFAULT '0' COMMENT '0: 手机号绑定 ， 1: 邮箱绑定',
+  	`validate_object` varchar(100) NOT NULL COMMENT '验证对象',
+  	`validate_code` varchar(32) NOT NULL COMMENT '验证码',
+  	`validate_expire` datetime NOT NULL COMMENT '验证内容有效时间',
+  	`ip` varchar(32) COMMENT '客户ip地址',
+  	`create_by` varchar(64) DEFAULT 'system' COMMENT '创建人',
+  	`create_time` datetime    COMMENT '创建时间',
+  	`update_by` varchar(64) DEFAULT 'system' COMMENT '修改人',
+  	`update_time` datetime    COMMENT '修改时间',
+  	PRIMARY KEY (`id`),
+  	KEY `account_validate_id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='客户短信邮箱认证表';
+-- ----------------------------
 -- 资讯类别信息表
 -- ----------------------------
 DROP TABLE IF EXISTS `info_category`;
