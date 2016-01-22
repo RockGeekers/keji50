@@ -39,6 +39,9 @@ public class Constants {
     
     public final static String COMMAND = "d";
     
+    public final static String VALIDATE_TYPE_PHONE = "0";
+    
+    public final static String VALIDATE_TYPE_EMAIL = "1";
     
     // 以下为返回给页面的参数
     
