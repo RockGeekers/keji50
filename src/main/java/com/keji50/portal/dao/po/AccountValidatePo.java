@@ -1,11 +1,13 @@
 package com.keji50.portal.dao.po;
 
-import com.keji50.portal.service.out.email.EmailTemplate;
+import java.util.Date;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import com.alibaba.druid.util.StringUtils;
+import com.keji50.portal.service.out.email.EmailTemplate;
 import com.keji50.portal.service.out.sms.SmsTemplate;
-import java.util.Date;
-import lombok.Data;
 
 /**
  * 客户手机邮箱认证PO
@@ -18,7 +20,8 @@ import lombok.Data;
  * @see 	 
  */
 @Data
-public class AccountValidatePo {
+@EqualsAndHashCode(callSuper = false)
+public class AccountValidatePo extends BasePo {
     
     /**
      * 主键id

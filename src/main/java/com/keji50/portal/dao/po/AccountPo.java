@@ -2,6 +2,7 @@ package com.keji50.portal.dao.po;
 
 import com.keji50.portal.common.utils.constants.Constants;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -15,7 +16,8 @@ import org.apache.commons.lang.StringUtils;
  * @see
  */
 @Data
-public class AccountPo {
+@EqualsAndHashCode(callSuper = false)
+public class AccountPo extends BasePo {
 
     /**
      * 用户id
