@@ -28,6 +28,8 @@ public interface AccountPoMapper {
     
     int updatePasswordByUsername(@Param("username") String username, @Param("usernameType") String usernameType, @Param("password") String password);
     
+    int updatePasswordById(@Param("id") int id, @Param("oldPassword") String oldPassword, @Param("newPassword") String newPassword);
+    
     int count(Map<String, Object> condition);
     
 }

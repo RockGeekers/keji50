@@ -104,6 +104,10 @@ public class AccountService {
     public boolean updateResetPassword(String username, String usernameType, String newPassword) {
         return accountPoMapper.updatePasswordByUsername(username, usernameType, MD5Utils.md5(newPassword)) > 0;
     }
+    
+    public boolean updateResetPassword(int accountId, String oldPassword, String newPassword) {
+        return accountPoMapper.updatePasswordById(accountId, MD5Utils.md5(oldPassword), MD5Utils.md5(newPassword)) > 0;
+    }
 
     public boolean updateAccount(AccountPo po) {
         return accountPoMapper.update(po) == 1;

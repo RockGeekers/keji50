@@ -17,8 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * ClassName:AccountController Function: TODO ADD FUNCTION Reason: TODO ADD
- * REASON
+ * 非登录用户行为Controller
  * 
  * @author sophia
  * @version
@@ -37,12 +36,28 @@ public class AccountController {
     @Resource(name = "accountValidateService")
     private AccountValidateService accountValidateService;
 
+    
+    
+    
     @RequestMapping(value = "/forget", method = RequestMethod.GET)
     public String forget() {
         return "account/forget/forget";
     }
-
-    @RequestMapping(value = "/send_code", method = RequestMethod.POST)
+    
+    @RequestMapping(value = "/sign_in", method = RequestMethod.GET)
+    public String signIn() {
+        return "account/signin/signin";
+    }
+    
+    @RequestMapping(value = "/sign_up", method = RequestMethod.GET)
+    public String signUp() {
+        return "account/signup/signup";
+    }
+    
+    /**
+     * ajax 发送验证码
+     */
+    @RequestMapping(value = "/ajax/send_code", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject ajaxSendCode(HttpServletRequest request) {
         JSONObject response = WebUtils.toFailedResponse();
@@ -53,7 +68,7 @@ public class AccountController {
             response.put(WebUtils.KEY_MESSAGE, "手机号或邮箱不能为空");
             return response;
         }
-        
+
         String usernameType = getUsernameType(username);
         if (StringUtils.equals("-1", usernameType)) {
             response.put(WebUtils.KEY_MESSAGE, "手机号或邮箱不正确");
@@ -69,7 +84,10 @@ public class AccountController {
         return WebUtils.toResponse(po.getId(), request);
     }
 
-    @RequestMapping(value = "/sign_up", method = RequestMethod.POST)
+    /**
+     * ajax 用户注册
+     */
+    @RequestMapping(value = "/ajax/sign_up", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject ajaxSignUp(HttpServletRequest request) {
         JSONObject response = WebUtils.toFailedResponse();
@@ -79,7 +97,7 @@ public class AccountController {
             response.put(WebUtils.KEY_MESSAGE, "用户名不能为空");
             return response;
         }
-        
+
         String usernameType = getUsernameType(username);
         if (StringUtils.equals("-1", usernameType)) {
             response.put(WebUtils.KEY_MESSAGE, "用户名不是手机号或邮箱");
@@ -118,7 +136,10 @@ public class AccountController {
         return response;
     }
 
-    @RequestMapping(value = "/sign_in", method = RequestMethod.POST)
+    /**
+     * ajax 用户注册
+     */
+    @RequestMapping(value = "/ajax/sign_in", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject ajaxSignIn(HttpServletRequest request) {
         JSONObject response = WebUtils.toFailedResponse();
@@ -136,7 +157,7 @@ public class AccountController {
             response.put(WebUtils.KEY_MESSAGE, "用户名不是手机号或邮箱");
             return response;
         }
-        
+
         // 验证用户名密码是否正确
         AccountPo account = accountService.login(username, usernameType, password);
         if (account == null) {
@@ -148,15 +169,28 @@ public class AccountController {
         request.getSession().setAttribute("loginUser", account);
         return WebUtils.toResponse(ResponseCode.SUCCEED);
     }
+    
+    /**
+     * ajax 用户注销登录
+     */
+    @RequestMapping(value = "/ajax/sign_out", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject ajaxSignOut(HttpServletRequest request) {
+        request.getSession().invalidate();
+        return WebUtils.toResponse(ResponseCode.SUCCEED);
+    }
 
-    @RequestMapping(value = "/forget_reset", method = RequestMethod.POST)
+    /**
+     * ajax 用户忘记密码
+     */
+    @RequestMapping(value = "/ajax/forget_reset", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject ajaxforgetReset(HttpServletRequest request) {
         JSONObject response = WebUtils.toFailedResponse();
 
         // 验证用户名是否合法
         String username = request.getParameter("username");
-        String newPassword = request.getParameter("newPassword");
+        String newPassword = request.getParameter("password");
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(newPassword)) {
             response.put(WebUtils.KEY_MESSAGE, "用户名密码不能为空");
             return response;
@@ -166,13 +200,13 @@ public class AccountController {
             response.put(WebUtils.KEY_MESSAGE, "用户名不是手机号或邮箱");
             return response;
         }
-        
+
         // 验证用户名是否存在
         if (!accountService.isUsernameExist(username, usernameType)) {
             response.put(WebUtils.KEY_MESSAGE, "用户名不存在");
             return response;
         }
-        
+
         // 校验码是否正确
         String verifyId = request.getParameter("verifyId");
         String verifyCode = request.getParameter("verifyCode");
@@ -180,12 +214,14 @@ public class AccountController {
             response.put(WebUtils.KEY_MESSAGE, "验证码验证失败");
             return response;
         }
-        
+
         if (accountService.updateResetPassword(username, usernameType, newPassword)) {
             response = WebUtils.toResponse(ResponseCode.SUCCEED);
         }
         return response;
     }
+
+    
 
     private String getUsernameType(String username) {
         String type = "-1";
