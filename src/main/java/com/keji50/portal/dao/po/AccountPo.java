@@ -28,12 +28,12 @@ public class AccountPo extends BasePo {
      * 用户邮箱
      */
     private String email;
-    
+
     /**
      * 手机号
      */
     private String phone;
-    
+
     /**
      * 密码
      */
@@ -43,7 +43,7 @@ public class AccountPo extends BasePo {
      * 真实姓名
      */
     private String realname;
-    
+
     /**
      * 用户昵称
      */
@@ -58,17 +58,17 @@ public class AccountPo extends BasePo {
      * QQ
      */
     private String qq;
-    
+
     /**
      * 微博
      */
     private String weibo;
-    
+
     /**
      * 微信
      */
     private String wechat;
-    
+
     /**
      * 用户状态
      */
@@ -82,7 +82,7 @@ public class AccountPo extends BasePo {
         if (StringUtils.isNotEmpty(realname)) {
             return realname;
         }
-        
+
         if (StringUtils.isNotEmpty(nickname)) {
             return nickname;
         }

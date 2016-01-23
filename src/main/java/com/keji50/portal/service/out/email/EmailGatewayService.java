@@ -32,7 +32,7 @@ public class EmailGatewayService implements DisposableBean {
 				try {
 					MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mailSender.createMimeMessage(), false, "GB2312");
 					mimeMessageHelper.setFrom(new InternetAddress(MimeUtility.encodeText("科技50") + " <" + mailFrom + ">"));
-					mimeMessageHelper.setTo(po.getObject());
+					mimeMessageHelper.setTo(po.getUsername());
 					mimeMessageHelper.setSubject("科技50-验证邮件");
 					mimeMessageHelper.setText(po.getValidateContent(), true);
 					

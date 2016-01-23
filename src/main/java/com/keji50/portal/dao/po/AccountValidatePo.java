@@ -28,8 +28,8 @@ public class AccountValidatePo extends BasePo {
 
     }
 
-    public AccountValidatePo(String object, String type) {
-        this.object = object;
+    public AccountValidatePo(String username, String type) {
+        this.username = username;
         this.type = type;
     }
 
@@ -44,9 +44,9 @@ public class AccountValidatePo extends BasePo {
     private String type;
 
     /**
-     * 验证对象， 手机号或者邮箱
+     * 用户名， 手机号或者邮箱
      */
-    private String object;
+    private String username;
 
     /**
      * 验证码

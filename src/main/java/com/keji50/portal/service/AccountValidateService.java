@@ -36,18 +36,18 @@ public class AccountValidateService {
     /**
      * 发送验证码
      * 
-     * @param object
-     *            验证实体， 手机号或者邮箱
-     * @param type
-     *            验证类型 0手机号 1邮箱
+     * @param username
+     *            用户名， 手机号或者邮箱
+     * @param usernameType
+     *            用户名类型 0手机号 1邮箱
      * @param ip
      *            客户端ip地址
      * 
      * @return AccountValidatePo 验证对象， 可获取其id作为验证的标示
      * @throws
      */
-    public AccountValidatePo sendValidateCode(String object, String type, String ip) {
-        AccountValidatePo po = new AccountValidatePo(object, type);
+    public AccountValidatePo sendValidateCode(String username, String usernameType, String ip) {
+        AccountValidatePo po = new AccountValidatePo(username, usernameType);
         po.setCode(getValidateCode());
         po.setExpire(getValidateExpire(Calendar.MINUTE, 3)); // 有效时间三分钟
         po.setIp(ip);
@@ -56,11 +56,11 @@ public class AccountValidateService {
         int count = accountValidatePoMapper.insert(po);
         if (count > 0) {
             // 异步发送验证码
-            if (StringUtils.equals(type, Constants.VALIDATE_TYPE_PHONE)) {
+            if (StringUtils.equals(usernameType, Constants.VALIDATE_TYPE_PHONE)) {
                 smsGatewayService.sendSms(po);
             }
 
-            if (StringUtils.equals(type, Constants.VALIDATE_TYPE_EMAIL)) {
+            if (StringUtils.equals(usernameType, Constants.VALIDATE_TYPE_EMAIL)) {
                 emailGatewayService.sendEmail(po);
             }
         }
@@ -77,11 +77,11 @@ public class AccountValidateService {
      * @return boolean 验证是否通过
      * @throws
      */
-    public boolean doValidate(int id, String code) {
-        AccountValidatePo po = accountValidatePoMapper.selectById(id);
+    public boolean doValidate(int verifyId, String verifyCode) {
+        AccountValidatePo po = accountValidatePoMapper.selectById(verifyId);
 
         // 短信验证是否存在 && 短信验证码是否过期 && 短信验证码是否正确
-        return po != null && new Date().compareTo(po.getExpire()) <= 0 && StringUtils.equals(po.getCode(), code);
+        return po != null && new Date().compareTo(po.getExpire()) <= 0 && StringUtils.equals(po.getCode(), verifyCode);
     }
 
     /**

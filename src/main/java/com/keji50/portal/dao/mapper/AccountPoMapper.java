@@ -20,13 +20,15 @@ public interface AccountPoMapper {
 
     AccountPo selectById(int id);
     
-    AccountPo selectByPassword(@Param("username") String username, @Param("password") String password);
+    AccountPo selectByCondition(Map<String, Object> condition);
     
     int insert(AccountPo po);
     
     int update(AccountPo po);
     
-    int count(Map<String, Object> conditions);
+    int updatePasswordByUsername(@Param("username") String username, @Param("usernameType") String usernameType, @Param("password") String password);
+    
+    int count(Map<String, Object> condition);
     
 }
 

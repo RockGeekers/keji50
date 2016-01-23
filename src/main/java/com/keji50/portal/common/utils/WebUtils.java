@@ -1,5 +1,7 @@
 package com.keji50.portal.common.utils;
 
+import java.util.regex.Pattern;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.alibaba.fastjson.JSONObject;
@@ -27,6 +29,10 @@ public class WebUtils {
 
     private static JSONObject RESPONSE_FAILED;
     private static JSONObject RESPONSE_SUCCEED;
+    
+    private static final Pattern PHONE_PATTERN = Pattern.compile("^1[3|4|5|7|8]\\d{9}$");
+    
+    private static final Pattern EMAIL_PATTERN = Pattern.compile("^(\\w)+(\\.\\w+)*@(\\w)+((\\.\\w+)+)$");
 
     static {
         RESPONSE_FAILED = new JSONObject();
@@ -46,7 +52,7 @@ public class WebUtils {
         return RESPONSE_FAILED;
     }
 
-    public static JSONObject toFailedResponse(ResponseCode responseCode) {
+    public static JSONObject toResponse(ResponseCode responseCode) {
         JSONObject json = new JSONObject();
         json.put(KEY_CODE, responseCode.getCode());
         json.put(KEY_MESSAGE, responseCode.getMessage());
@@ -58,5 +64,13 @@ public class WebUtils {
         succeed.put(KEY_DATA, data);
         succeed.put(KEY_CONTEXT_PATH, request.getContextPath());
         return succeed;
+    }
+    
+    public static boolean isPhone(String phone) {
+        return PHONE_PATTERN.matcher(phone).find();
+    }
+    
+    public static boolean isEmail(String email) {
+        return EMAIL_PATTERN.matcher(email).find();
     }
 }

@@ -46,7 +46,7 @@ public class SmsGatewayService implements DisposableBean {
 				Map<String, String> params = new HashMap<String, String>();
 				params.put("account", account);
 				params.put("password", password);
-				params.put("mobile", po.getObject());
+				params.put("mobile", po.getUsername());
 				params.put("content", po.getValidateContent());
 
 				try {
