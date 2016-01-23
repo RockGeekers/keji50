@@ -4,7 +4,7 @@
 
 	<resultMap id="AccountResultMap" type="com.keji50.portal.dao.po.AccountPo">
 		<id column="author_id" property="id" jdbcType="DECIMAL" />
-		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="realname" property="realname" jdbcType="VARCHAR" />
 		<result column="email" property="email" jdbcType="VARCHAR" />
 		<result column="nickname" property="nickname" jdbcType="VARCHAR" />
 		<result column="author_image" property="image" jdbcType="VARCHAR" />
@@ -34,7 +34,7 @@
 		a.id, a.info_category_id, a.author_id, a.title, a.image, a.short_desc, a.tags, a.create_date
 	</sql>
 	<sql id="Account_Column_List">
-		b.username, b.email, b.nickname, b.image as account_image
+		b.realname, b.email, b.nickname, b.image as account_image
 	</sql>
 	<sql id="Category_Column_List">
 		c.name as info_category_name, c.color_code

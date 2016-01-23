@@ -7,12 +7,12 @@ import com.keji50.portal.common.utils.constants.ResponseCode;
 
 /**
  * web 请求帮助类
- *
+ * 
  * @author chao.li
  * @version
  * @since Ver 1.1
  * @Date 2015年12月12日 下午1:02:33
- *
+ * 
  * @see
  */
 public class WebUtils {
@@ -20,9 +20,9 @@ public class WebUtils {
     public static final String KEY_CODE = "code";
 
     public static final String KEY_MESSAGE = "message";
-    
+
     private static final String KEY_DATA = "data";
-    
+
     private static final String KEY_CONTEXT_PATH = "contextpath";
 
     private static JSONObject RESPONSE_FAILED;
@@ -44,6 +44,13 @@ public class WebUtils {
 
     public static JSONObject toFailedResponse() {
         return RESPONSE_FAILED;
+    }
+
+    public static JSONObject toFailedResponse(ResponseCode responseCode) {
+        JSONObject json = new JSONObject();
+        json.put(KEY_CODE, responseCode.getCode());
+        json.put(KEY_MESSAGE, responseCode.getMessage());
+        return json;
     }
 
     public static JSONObject toResponse(Object data, HttpServletRequest request) {

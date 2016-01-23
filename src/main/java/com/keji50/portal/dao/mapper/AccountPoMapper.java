@@ -1,5 +1,9 @@
 package com.keji50.portal.dao.mapper;
 
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.keji50.portal.dao.po.AccountPo;
 
 /**
@@ -15,6 +19,14 @@ import com.keji50.portal.dao.po.AccountPo;
 public interface AccountPoMapper {
 
     AccountPo selectById(int id);
+    
+    AccountPo selectByPassword(@Param("username") String username, @Param("password") String password);
+    
+    int insert(AccountPo po);
+    
+    int update(AccountPo po);
+    
+    int count(Map<String, Object> conditions);
     
 }
 

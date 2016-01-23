@@ -18,7 +18,10 @@ public enum ResponseCode {
     SUCCEED("0", "成功"),
 
     // 系统出错返回码
-    FAILED("-1", "系统开小差啦");
+    FAILED("-1", "系统开小差啦"),
+    
+    // 手机号或者邮箱已存在
+    ALREADY_EXIST("-2", "手机号或邮箱已存在");
 
     @Getter
     private String code;
