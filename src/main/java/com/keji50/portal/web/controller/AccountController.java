@@ -129,7 +129,7 @@ public class AccountController {
         // 用户注册， 并将注册好的客户加入session
         AccountPo account = accountService.register(username, usernameType, password);
         if (account != null) {
-            request.getSession().setAttribute("loginUser", account);
+            request.getSession().setAttribute(Constants.SESSION_LOGIN_USER, account);
             response = WebUtils.toResponse(ResponseCode.SUCCEED);
         }
 
@@ -166,7 +166,7 @@ public class AccountController {
         }
 
         // 将用户信息加入session
-        request.getSession().setAttribute("loginUser", account);
+        request.getSession().setAttribute(Constants.SESSION_LOGIN_USER, account);
         return WebUtils.toResponse(ResponseCode.SUCCEED);
     }
     

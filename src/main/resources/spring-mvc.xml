@@ -98,5 +98,12 @@
 
 	 <!--初始 fis 配置-->
     <bean id="fisInit" class="com.baidu.fis.velocity.spring.FisBean" />
+    
+    <mvc:interceptors>
+    	<mvc:interceptor>
+    		<mvc:mapping path="/uc/*"/>
+    		<bean class="com.keji50.portal.web.controller.intercepter.AccountCenterIntercepter" />
+    	</mvc:interceptor>
+    </mvc:interceptors>
 
 </beans>

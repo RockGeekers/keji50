@@ -43,6 +43,8 @@ public class Constants {
     
     public final static String VALIDATE_TYPE_EMAIL = "1";
     
+    public final static String SESSION_LOGIN_USER = "loginUser";
+    
     // 以下为返回给页面的参数
     
     // 用户默认头像
