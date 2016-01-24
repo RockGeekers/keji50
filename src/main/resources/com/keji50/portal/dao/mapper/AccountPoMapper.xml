@@ -29,7 +29,47 @@
 		where id = #{id, jdbcType=DECIMAL}
 	</select>
 	
+	<select id="selectByCondition" resultMap="AccountResultMap">
+		select <include refid="Account_Column_List" /> from account
+		where 1=1
+		<if test="phone != null">
+			and phone = #{phone, jdbcType=VARCHAR}
+		</if>
+		<if test="email != null">
+			and email = #{email, jdbcType=VARCHAR}
+		</if>
+	</select>
 	
+	<insert id="insert" parameterType="com.keji50.portal.dao.po.AccountPo">
+		insert into account(
+			<if test="phone != null">phone, </if>
+			<if test="email != null">email, </if>
+			password, create_time, update_time
+		) values (
+			<if test="phone != null">#{phone, jdbcType=VARCHAR}, </if>
+			<if test="email != null">#{email, jdbcType=VARCHAR}, </if>
+			#{password, jdbcType=VARCHAR}, now(), now()
+		)
+		<selectKey resultType="java.lang.Integer" keyProperty="id">
+  			select LAST_INSERT_ID() 
+  		</selectKey>
+	</insert>
+	
+	<update id="updatePasswordByUsername">
+		update account set password = #{password, jdbcType=VARCHAR}
+		where 
+		<if test="usernameType == 0">
+			phone = #{username, jdbcType=VARCHAR}
+		</if>
+		<if test="usernameType == 1">
+			email = #{username, jdbcType=VARCHAR}
+		</if>
+	</update>
+	
+	<update id="updatePasswordById">
+		update account set password = #{newPassword, jdbcType=VARCHAR}
+		where id = #{id, jdbcType=DECIMAL} and password = #{oldPassword, jdbcType=VARCHAR}
+	</update>
 	
 	<select id="count" resultType="java.lang.Integer">
 		select count(1) from account 

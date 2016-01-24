@@ -38,7 +38,7 @@ public class AccountCenterController {
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home() {
-        return "account/home/home";
+        return "uc/home/home";
     }
     
     /**
