@@ -1,1 +1,1 @@
-define("widget/header/header",function(){});
+define("widget/header/header",["require","exports","module","components/jquery/jquery"],function(e){var n=e("components/jquery/jquery");n("#J_signout").click(function(){return n.post("/account/ajax/sign_out",function(e){0==e.code&&(location.href="/")}),!1})});

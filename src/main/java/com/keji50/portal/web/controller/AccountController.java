@@ -44,7 +44,7 @@ public class AccountController {
     @RequestMapping(value = "/forget", method = RequestMethod.GET)
     public String forget(Model model) {
         model.addAttribute(Constants.RESPONSE_TITLE, "科技50 忘记密码");
-        return "account/forget/forget";
+        return "page/account/forget";
     }
     
     @RequestMapping(value = "/sign_in", method = RequestMethod.GET)

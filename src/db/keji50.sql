@@ -31,7 +31,7 @@ DROP TABLE IF EXISTS `account_validate`;
 CREATE TABLE `account_validate` (
 	`id` int(11) unsigned auto_increment NOT NULL COMMENT '主键ID',
   	`type` varchar(2) DEFAULT '0' COMMENT '0: 手机号绑定 ， 1: 邮箱绑定',
-  	`validate_object` varchar(100) NOT NULL COMMENT '验证对象',
+  	`validate_username` varchar(100) NOT NULL COMMENT '验证用户名',
   	`validate_code` varchar(32) NOT NULL COMMENT '验证码',
   	`validate_expire` datetime NOT NULL COMMENT '验证内容有效时间',
   	`ip` varchar(32) COMMENT '客户ip地址',

@@ -5,7 +5,7 @@
 	<resultMap id="AccountValidateResultMap" type="com.keji50.portal.dao.po.AccountValidatePo">
 		<id column="id" property="id" jdbcType="DECIMAL" />
 		<result column="type" property="type" jdbcType="VARCHAR" />
-		<result column="validate_object" property="object" jdbcType="VARCHAR" />
+		<result column="validate_username" property="username" jdbcType="VARCHAR" />
 		<result column="validate_code" property="code" jdbcType="VARCHAR" />
 		<result column="validate_expire" property="expire" jdbcType="TIMESTAMP" />
 		<result column="ip" property="ip" jdbcType="VARCHAR" />
@@ -16,7 +16,7 @@
 	</resultMap>
 	
 	<sql id="Account_Validate_Column_List">
-		id, type, validate_object, validate_code, validate_expire
+		id, type, validate_username, validate_code, validate_expire
 	</sql>
 
 	<select id="selectById" resultMap="AccountValidateResultMap">
@@ -26,8 +26,8 @@
 	
 	
 	<insert id="insert" parameterType="com.keji50.portal.dao.po.AccountValidatePo">
-		insert into account_validate(type, validate_object, validate_code, validate_expire, ip, create_time, update_time)
-		values (#{type, jdbcType=VARCHAR}, #{object, jdbcType=VARCHAR}, #{code, jdbcType=VARCHAR}, #{expire, jdbcType=TIMESTAMP}
+		insert into account_validate(type, validate_username, validate_code, validate_expire, ip, create_time, update_time)
+		values (#{type, jdbcType=VARCHAR}, #{username, jdbcType=VARCHAR}, #{code, jdbcType=VARCHAR}, #{expire, jdbcType=TIMESTAMP}
 		, #{ip, jdbcType=VARCHAR}, now(), now())
 		<selectKey resultType="java.lang.Integer" keyProperty="id">
   			select LAST_INSERT_ID() 
