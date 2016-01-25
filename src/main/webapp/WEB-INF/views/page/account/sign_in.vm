@@ -46,5 +46,5 @@
 #script()
     require(['page/account/login']);
 #end
-#require("page/account/login.vm")
+#require("page/account/sign_in.vm")
 #end

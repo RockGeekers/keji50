@@ -60,5 +60,5 @@ s                </div>
 #script()
     require(['page/account/login']);
 #end
-#require("page/account/register.vm")
+#require("page/account/sign_up.vm")
 #end

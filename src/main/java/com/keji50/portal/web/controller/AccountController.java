@@ -44,19 +44,20 @@ public class AccountController {
     @RequestMapping(value = "/forget", method = RequestMethod.GET)
     public String forget(Model model) {
         model.addAttribute(Constants.RESPONSE_TITLE, "科技50 忘记密码");
-        return "page/account/forget";
+        return "page/account/sign_forget";
     }
     
     @RequestMapping(value = "/sign_in", method = RequestMethod.GET)
     public String signIn(Model model) {
         model.addAttribute(Constants.RESPONSE_TITLE, "科技50 登录");
-        return "page/account/login";
+        model.addAttribute(Constants.RESPONSE_INDEX, "sign_in");
+        return "page/account/sign_in";
     }
     
     @RequestMapping(value = "/sign_up", method = RequestMethod.GET)
     public String signUp(Model model) {
         model.addAttribute(Constants.RESPONSE_TITLE, "科技50 注册");
-        return "page/account/register";
+        return "page/account/sign_up";
     }
     
     /**

@@ -53,6 +53,9 @@ public class Constants {
     // 科技50 域名
     public final static String RESPONSE_KEJI50_DOMAIN = "keji50_domain";
 
+    // 页面index
+    public final static String RESPONSE_INDEX = "index";
+    
     // 页面标题
     public final static String RESPONSE_TITLE = "title";
     
