@@ -1,0 +1,60 @@
+#extends("page/layout/front/front.vm")
+#require("page/account/base.css")
+#block("content")
+<div class="index-bg">
+</div>
+<div class="container">
+    <div class="login-left">
+        <div class="ele-1"></div>
+        <a href="#" target="_blank">立即参与</a>
+    </div>
+    <div class="form-wrapper ng-scope" ui-view="">
+        <form action="" method="post" role="form" id="loginForm" name="LoginForm" class="form common-form">
+            <legend class="ng-scope">
+                <h2>账号密码登录</h2>
+            </legend>
+            <div class="reg-entry">
+                <a class="ng-scope" href="$rc.getContextPath()/account/sign_up">注册新用户</a>
+            </div>
+            <div class="error-wrapper" style="display:none" id="J_errorwrap">
+                <i></i>
+                <div class="error">
+                    <span class="error-msg"></span><!-- end ngIf: remoteError -->
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="icon-person"></label>
+                <input type="text" class="form-control" name="username" placeholder="手机号/邮箱" required="">
+            </div>
+            <div class="form-group">
+                <label class="icon-lock"></label>
+                <input type="password" class="form-control" name="password" placeholder="密码" required="">
+            </div>
+            <div class="form-group">
+                <a ui-sref="forget" target="_blank" href="$rc.getContextPath()/account/forget">忘记登录密码</a>
+            </div>
+            <button type="button" id="J_submit" class="btn btn-primary">立即登录</button>
+
+        </form>
+        <!--使用第三方账号绑定-->
+        <!-- ngIf: !bindType -->
+        <div class="networks ng-scope" ng-if="!bindType">
+            <h3>社交网络登录</h3>
+            <div class="items">
+                <a class="item icon-qq" href="javascript:void(0)" title="QQ"></a>
+                <a class="item icon-wechat" href="javascript:void(0)" title="微信"></a>
+                <a class="item icon-weibo" href="javascript:void(0)" title="微博"></a>
+            </div>
+        </div>
+    </div>
+</div>
+#end## end of body
+
+## 需要依赖一下自己，否则该 vm 中依赖没法自动加载进来。
+
+
+#script()
+    require(['page/account/login']);
+#end
+#require("page/account/login.vm")
+#end

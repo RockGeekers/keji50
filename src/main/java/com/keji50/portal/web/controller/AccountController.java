@@ -1,5 +1,7 @@
 package com.keji50.portal.web.controller;
 
+import org.springframework.ui.Model;
+
 import com.alibaba.fastjson.JSONObject;
 import com.keji50.portal.common.utils.WebUtils;
 import com.keji50.portal.common.utils.constants.Constants;
@@ -40,18 +42,21 @@ public class AccountController {
     
     
     @RequestMapping(value = "/forget", method = RequestMethod.GET)
-    public String forget() {
+    public String forget(Model model) {
+        model.addAttribute(Constants.RESPONSE_TITLE, "科技50 忘记密码");
         return "account/forget/forget";
     }
     
     @RequestMapping(value = "/sign_in", method = RequestMethod.GET)
-    public String signIn() {
-        return "account/signin/signin";
+    public String signIn(Model model) {
+        model.addAttribute(Constants.RESPONSE_TITLE, "科技50 登录");
+        return "page/account/login";
     }
     
     @RequestMapping(value = "/sign_up", method = RequestMethod.GET)
-    public String signUp() {
-        return "account/signup/signup";
+    public String signUp(Model model) {
+        model.addAttribute(Constants.RESPONSE_TITLE, "科技50 注册");
+        return "page/account/register";
     }
     
     /**

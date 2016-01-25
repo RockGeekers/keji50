@@ -72,7 +72,7 @@ public class AccountPo extends BasePo {
     /**
      * 用户状态
      */
-    private int status;
+    private String status;
 
     public String getImage() {
         return StringUtils.isEmpty(image) ? Constants.DEFAULT_ACCOUNT_IMAGE : image;
@@ -87,6 +87,14 @@ public class AccountPo extends BasePo {
             return nickname;
         }
 
+        if (StringUtils.isNotEmpty(phone)) {
+            return phone;
+        }
+        
+        if (StringUtils.isNotEmpty(email)) {
+            return email;
+        }
+        
         return String.valueOf(id);
     }
 }

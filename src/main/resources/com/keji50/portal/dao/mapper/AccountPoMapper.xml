@@ -21,7 +21,7 @@
 	</resultMap>
 	
 	<sql id="Account_Column_List">
-		id, email, phone, realname, nickname, image, qq, weibo, wechat, status
+		id, email, phone, password, realname, nickname, image, qq, weibo, wechat, status
 	</sql>
 
 	<select id="selectById" resultMap="AccountResultMap">
