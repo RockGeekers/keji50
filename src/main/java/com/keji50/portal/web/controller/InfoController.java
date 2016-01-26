@@ -193,9 +193,6 @@ public class InfoController {
     }
 
     private void initModel(Model model) {
-        // 科技50域名
-        model.addAttribute(Constants.RESPONSE_KEJI50_DOMAIN, Constants.KEJI50_DOMAIN);
-        
         // 用户默认头像
         model.addAttribute(Constants.RESPONSE_DEFAULT_ACCOUNT_IMAGE, Constants.DEFAULT_ACCOUNT_IMAGE);
     }

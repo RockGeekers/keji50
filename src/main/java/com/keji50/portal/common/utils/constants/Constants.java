@@ -22,8 +22,6 @@ public class Constants {
      * 用户默认头像
      */
     public final static String DEFAULT_ACCOUNT_IMAGE = CustomizedPropertyPlaceholderConfigurer.getContextProperty("account.default.image");
-
-    public final static String KEJI50_DOMAIN = CustomizedPropertyPlaceholderConfigurer.getContextProperty("keji50.domain");
     
     public final static String INFO_CATEGORY_ID = "info_category_id";
     
@@ -50,9 +48,6 @@ public class Constants {
     // 用户默认头像
     public final static String RESPONSE_DEFAULT_ACCOUNT_IMAGE = "default_account_image";
     
-    // 科技50 域名
-    public final static String RESPONSE_KEJI50_DOMAIN = "keji50_domain";
-
     // 页面index
     public final static String RESPONSE_INDEX = "index";
     
