@@ -195,6 +195,9 @@ public class InfoController {
     private void initModel(Model model) {
         // 用户默认头像
         model.addAttribute(Constants.RESPONSE_DEFAULT_ACCOUNT_IMAGE, Constants.DEFAULT_ACCOUNT_IMAGE);
+        
+        // 初始化页面index
+        model.addAttribute(Constants.RESPONSE_INDEX, "info");
     }
     
     private int getInfoOffset(HttpServletRequest request) {
