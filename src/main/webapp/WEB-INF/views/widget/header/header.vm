@@ -27,5 +27,5 @@
     </div>
 </div>
 #script()
-    require(['widget/header/header']);
+    require(['page/account/account']);
 #end
