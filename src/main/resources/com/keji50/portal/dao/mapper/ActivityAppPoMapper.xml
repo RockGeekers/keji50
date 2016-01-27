@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.keji50.portal.dao.mapper.ActivityAppPoMapper" >
+  <resultMap id="BaseResultMap" type="com.keji50.portal.dao.po.ActivityAppPo" >
+    <result column="activity_id" property="activityId" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="app_dt" property="appDt" jdbcType="DATE" />
+  </resultMap>
+  <insert id="insert" parameterType="com.keji50.portal.dao.po.ActivityAppPo" >
+    insert into activity_app (activity_id, user_id, mobile, 
+      app_dt)
+    values (#{activityId,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{mobile,jdbcType=VARCHAR}, 
+      #{appDt,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.keji50.portal.dao.po.ActivityAppPo" >
+    insert into activity_app
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="activityId != null" >
+        activity_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="appDt != null" >
+        app_dt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="activityId != null" >
+        #{activityId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="appDt != null" >
+        #{appDt,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+</mapper>

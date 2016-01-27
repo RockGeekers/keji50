@@ -100,3 +100,36 @@ CREATE TABLE `info_comment` (
   KEY `info_comment_info_id` (`info_id`),
   KEY `info_comment_author_id` (`author_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='资讯评论表';
+
+-- ----------------------------
+-- 活动报名表
+-- ----------------------------
+DROP TABLE IF EXISTS `activity_app`;
+CREATE TABLE `activity_app` (
+  `activity_id` varchar(32) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `mobile` varchar(20) NOT NULL,
+  `app_dt` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='活动报名表';
+
+-- ----------------------------
+-- 创业活动表
+-- ----------------------------
+DROP TABLE IF EXISTS `es_activity`;
+CREATE TABLE `es_activity` (
+  `id` varchar(32) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `overview` text NOT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
+  `begintime` datetime NOT NULL,
+  `endtime` datetime NOT NULL,
+  `organizer` text NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `address` varchar(200) NOT NULL,
+  `image_id` varchar(32) NOT NULL,
+  `text` text NOT NULL,
+  `app_begin_dt` date DEFAULT NULL,
+  `app_end_dt` date DEFAULT NULL,
+  `status` char(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='创业活动表';
