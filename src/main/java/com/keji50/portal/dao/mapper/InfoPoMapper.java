@@ -1,9 +1,10 @@
 package com.keji50.portal.dao.mapper;
 
-import java.util.List;
-import java.util.Map;
 import com.github.pagehelper.Page;
 import com.keji50.portal.dao.po.InfoPo;
+import java.util.List;
+import java.util.Map;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 文章持久层接口
@@ -76,4 +77,13 @@ public interface InfoPoMapper {
      * @return
      */
     Page<InfoPo> selectByAuthor(int authorId);
+        /**
+     * 
+     * updateHotCountById:(根据文章ID更新文章热度)
+     * @param id
+     * @return
+     * @author steven.shi
+     * @date 2016-1-27 下午04:55:24
+     */
+    int updateHotCountById(@Param("id") int id);
 }

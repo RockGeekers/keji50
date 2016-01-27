@@ -16,6 +16,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,6 +38,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping(value = "")
 public class InfoController {
+	
+    private static final Logger logger = LoggerFactory.getLogger(InfoController.class);
 
     @Resource(name = "infoService")
     private InfoService infoService;
@@ -82,7 +86,13 @@ public class InfoController {
         if (info == null) {
             return "404";
         }
-
+        //点击详情,更新文章热度+1
+        try{
+            infoService.updateHotCountById(infoId);
+        }catch(Exception e){
+            logger.error("###点击详情更新文章{}热度异常,异常信息:{}",infoId,e);
+        }
+        
         initModel(model);
 
         Page<InfoPo> infosNearby = infoService.getInfosNearby(info.getAuthor().getId());

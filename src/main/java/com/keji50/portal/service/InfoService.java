@@ -214,5 +214,15 @@ public class InfoService {
 
         System.out.println(service.getNextInfoById(2));
     }
-
+    /**
+     * 
+     * updateHotCountById:(根据文章ID更新文章热度)
+     * @param id
+     * @return
+     * @author steven.shi
+     * @date 2016-1-27 下午05:11:42
+     */
+    public int updateHotCountById(int id){
+        return infoPoMapper.updateHotCountById(id);   
+    }
 }
