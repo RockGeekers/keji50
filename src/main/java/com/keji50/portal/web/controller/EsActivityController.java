@@ -11,7 +11,7 @@
 
 package com.keji50.portal.web.controller;
 
-import com.keji50.portal.dao.po.EsActivity;
+import com.keji50.portal.dao.po.EsActivityPo;
 import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class EsActivityController {
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     @ResponseBody
-    public List<EsActivity> list() {
+    public List<EsActivityPo> list() {
         return null;
     }
 
