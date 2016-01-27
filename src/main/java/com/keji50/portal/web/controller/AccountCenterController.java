@@ -1,14 +1,15 @@
 package com.keji50.portal.web.controller;
 
+import com.keji50.portal.common.utils.constants.Constants;
+
+import org.springframework.ui.Model;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.alibaba.fastjson.JSONObject;
 import com.keji50.portal.common.utils.WebUtils;
 import com.keji50.portal.common.utils.constants.ResponseCode;
@@ -37,7 +38,8 @@ public class AccountCenterController {
     private AccountValidateService accountValidateService;
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public String home() {
+    public String home(Model model) {
+        model.addAttribute(Constants.RESPONSE_TITLE, "科技50 账户中心");
         return "page/uc/home";
     }
     
