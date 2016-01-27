@@ -82,6 +82,14 @@ public class InfoPo {
      * 文章状态 c:草稿 s:已审核 d:删除
      */
     private String state;
+    /**
+     * 文章排序位置，默认0
+     */
+    private String infOrder;
+    /**
+     * 文章点击数（热点）按照权重配，配值越大排序越靠前
+     */
+    private int hotCount;
 
     public List<String> getTags() {
         List<String> tagList = Collections.emptyList();
