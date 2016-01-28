@@ -34,7 +34,7 @@
 		<association property="infoCategory" column="info_category_id" resultMap="CategoryResultMap" />
 	</resultMap>
 	<sql id="Info_Column_List">
-		a.id, a.info_category_id, a.author_id, a.title, a.image, a.short_desc, a.tags, a.create_date
+		a.id, a.info_category_id, a.author_id, a.title, a.image, a.short_desc, a.tags, a.create_date,a.inf_order,a.hot_count
 	</sql>
 	<sql id="Account_Column_List">
 		b.realname, b.email, b.phone, b.nickname, b.image as account_image
@@ -112,7 +112,7 @@
 		order by hot_count desc, id desc limit 6
 	</select>
  	
- 	<update id="updateHotCountById" parameterType="java.lang.String" >
+ 	<update id="updateHotCountById" parameterType="java.lang.Integer" >
  		update info i set i.hot_count=i.hot_count+1 where i.id=#{id, jdbcType=DECIMAL} 
 	</update>
 
