@@ -77,6 +77,8 @@ CREATE TABLE `info` (
   `create_date` datetime NOT NULL COMMENT '创建时间',
   `update_date` datetime COMMENT '更新时间',
   `state` varchar(1) COLLATE utf8_bin DEFAULT 'c' COMMENT '数据状态   c:草稿 s;已审核 d:删除',
+  `inf_order` varchar(3) DEFAULT '0' COMMENT '文章排序(权重越大展示越前)' ,
+  `hot_count` int(11)  DEFAULT 0 COMMENT '人气(热度)',
   PRIMARY KEY (`id`),
   KEY `info_id` (`id`),
   KEY `info_info_category_id` (`info_category_id`),
