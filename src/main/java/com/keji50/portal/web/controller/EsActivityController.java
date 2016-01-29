@@ -11,12 +11,12 @@
 
 package com.keji50.portal.web.controller;
 
-import com.keji50.portal.dao.po.EsActivityPo;
-import java.util.List;
+import com.keji50.portal.common.utils.constants.Constants;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 创业活动Contorller
@@ -28,10 +28,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping(value = "/activity")
 public class EsActivityController {
-    @RequestMapping(value = "/list", method = RequestMethod.POST)
-    @ResponseBody
-    public List<EsActivityPo> list() {
-        return null;
+
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public String index(Model model) {
+        
+        model.addAttribute(Constants.RESPONSE_TITLE, "科技50 创业活动");
+        return "page/activity/activity_list";
     }
 
 }

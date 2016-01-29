@@ -1,0 +1,1 @@
+define("page/activity/activity",["require","exports","module","components/jquery/jquery"],function(n){var o=n("components/jquery/jquery");o("#J_signout, #J_signout_uc").click(function(){return o.post("/account/ajax/sign_out",function(n){0==n.code&&(location.href="/")}),!1})});
